@@ -103,42 +103,41 @@ export const useGoogleMapStore = defineStore("GoogleMapStore", {
   }),
   getters: {},
   actions: {
-    set_markers_info_cache(marker_info) {
-      this.markers_info_cache.push(marker_info);
-    },
-    get_marker_info_cache(marker_id) {
-      return this.markers_info_cache.find(
-        (marker_info) => marker_info.marker_id === 2
-      );
-    },
+    // 獲取區域座標
     get_areaCoordinates() {
       return this.areaCoordinates;
     },
+    // 設定地圖
     set_google_map(map) {
       this.google_map = map;
     },
+    // 設定地圖標記
     set_makers(markers) {
       this.markers = markers;
     },
+    // 獲取地圖所有標記
     get_markers() {
       return this.markers;
     },
+    // 獲取南臺科大經緯度
     get_stust_latlng() {
       return this.stust;
     },
+    // 獲取台南大學經緯度
     get_nutn_latlng() {
       return this.nutn;
     },
     // 接受傳入對應字串使用預設南臺科大及台南大學經緯度資料，或自訂json格式的經緯度資料 { lat, lng }
     change_map_focus(latlng) {
-      this.google_map.setCenter(
-        latlng === "stust"
-          ? this.stust
-          : latlng === "nutn"
-          ? this.nutn
-          : { lat: latlng.lat, lng: latlng.lng }
-      );
-      this.google_map.setZoom(17);
+      this.google_map.moveCamera({
+        center:
+          latlng === "stust"
+            ? this.stust
+            : latlng === "nutn"
+            ? this.nutn
+            : { lat: latlng.lat, lng: latlng.lng },
+        zoom: 17, // 目標縮放級別
+      });
     },
     // 切換地圖視角
     move_camera() {

@@ -26,11 +26,12 @@ const router = useRouter();
 const route = useRoute();
 const account = ref('')
 
+// 登入，並將使用者資訊暫時儲存(僅驗證帳號是否存在)
 async function login() {
   const login = account.value ? await login_account(account.value) : alert("請輸入帳號")
   if (login.success) {
     const { id, school_number, name } = login.data
-    // 暫時儲存使用者資訊
+    // 暫存使用者資訊至session
     set_account(id, school_number, name)
     router.push(route.query.redirect || '/')
   } else {

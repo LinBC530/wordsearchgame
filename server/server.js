@@ -18,8 +18,11 @@ app.use(cors());
 
 // API
 const api = require("./services/api/main");
+const { errors } = require("celebrate");
 app.use(express.json());
 app.use("/api", api);
+app.use(errors());
+
 
 // https
 const https = require("https").Server(options, app);

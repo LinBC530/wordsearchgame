@@ -6,7 +6,8 @@
       </div>
 
       <div class="text-h2" style="opacity:.4">
-        Oops. Nothing here...
+        <!-- Oops. Nothing here... -->
+        Oops！找不到頁面
       </div>
 
       <q-btn
@@ -15,7 +16,7 @@
         text-color="blue"
         unelevated
         to="/"
-        label="Go Home"
+        label="回首頁"
         no-caps
       />
     </div>

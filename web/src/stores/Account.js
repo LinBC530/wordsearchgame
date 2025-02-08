@@ -8,12 +8,14 @@ export const useAccountStore = defineStore("account", {
     islogin: false
   }),
   actions: {
+    // 存放帳戶資訊
     set_account(id, school_number, name) {
       this.id = id;
       this.school_number = school_number;
       this.name = name;
       this.islogin = true
     },
+    // 清除帳戶資訊
     get_account() {
       return {
         id: this.id,
@@ -22,4 +24,14 @@ export const useAccountStore = defineStore("account", {
       };
     },
   },
+  // 啟用數據持久化，存儲在session
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        key: 'user-store',
+        storage: sessionStorage
+      }
+    ]
+  }
 });
