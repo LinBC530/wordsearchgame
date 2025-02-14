@@ -8,7 +8,7 @@
       <q-card v-show="!isloading" class="row justify-center col-12 col-md-5"
         style="max-width: 500px; max-height: 300px;" v-for="attraction in attractions" :key="attraction">
         <q-card-section class="col-5">
-          <q-img :src="attraction.image || '/src/assets/load_img_error.png'" class="fit" fit="contain" style="max-height: 200px" />
+          <q-img :src="attraction.image_path || 'load_img_error.png'" class="fit" fit="contain" style="max-height: 200px" />
         </q-card-section>
         <q-card-section class="col column">
           <div class="text-h5"><span class="title" @click="goto('/attractions/' + attraction.id)">{{ attraction.name }}</span></div>
@@ -26,7 +26,7 @@
 <script setup>
 import { ref, onMounted, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { get_school_attraction_list } from "src/api/AreasServices";
+import { get_school_attraction_list } from "src/api/AttractionService";
 
 const router = useRouter();
 const route = useRoute();

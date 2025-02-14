@@ -7,7 +7,7 @@
         <div class="col-12 col-md-5 row justify-center">
           <!-- 影像 -->
           <q-skeleton v-if="isloading" class="q-mx-md" size="100%" animation="fade" />
-          <q-img v-else :src="attraction.image || '/src/assets/load_img_error.png'" class="img" fit="contain" />
+          <q-img v-else :src="attraction.image || 'load_img_error.png'" class="img" fit="contain" />
         </div>
         <div class="col-12 col-md q-col-gutter-md q-mt-md">
           <!-- 標題 -->
@@ -129,8 +129,8 @@
 
 <script setup>
 import { ref, onMounted, reactive, watch } from 'vue';
-import { get_attraction_info } from "src/api/AreasServices"
-import { get_articles } from "src/api/ArticeServices"
+import { get_attraction_info } from "src/api/AttractionService"
+import { get_articles } from "src/api/ArticeService"
 import { useRoute } from 'vue-router';
 import { useRouter } from 'vue-router';
 
@@ -166,7 +166,7 @@ function change_tab(value) {
 function set_attraction_info(data) {
   attraction.name = data.name || ''
   attraction.audio = data.audio || ''
-  attraction.image = data.image || '/src/assets/load_img_error.png'
+  attraction.image = data.image || 'load_img_error.png'
   attraction.introduce = data.introduce || ""
   attraction.coordinate = data.coordinate
 }

@@ -11,7 +11,7 @@
       <q-carousel v-else class="full-width carousel" v-model="slide" transition-prev="slide-right" transition-next="slide-left"
         animated swipeable arrows navigation control-color="black">
         <q-carousel-slide :name="'img' + i" v-for="(image, i) in article.images" :key="i">
-          <q-img class="fit" :src="image || '/src/assets/load_img_error.png'" fit="contain" />
+          <q-img class="fit" :src="image || 'load_img_error.png'" fit="contain" />
         </q-carousel-slide>
 
       </q-carousel>
@@ -24,7 +24,7 @@
 
 <script setup>
 import { onMounted, reactive, ref, watch } from 'vue'
-import { get_article } from 'src/api/ArticeServices'
+import { get_article } from 'src/api/ArticeService'
 import { useRoute, useRouter } from 'vue-router'
 
 const router = useRouter()

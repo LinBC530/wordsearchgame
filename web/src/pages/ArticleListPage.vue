@@ -2,12 +2,7 @@
   <q-page class="row justify-center">
     <div class="col-12 q-mt-md q-gutter-y-md column"
       :style="$q.screen.width > 1024 ? 'max-width: 80%;' : 'max-width: 95%;'">
-<!-- 
-      <q-toolbar class="">
-        <q-breadcrumbs class="">
-          <q-breadcrumbs-el label="課程遊戲" />
-        </q-breadcrumbs>
-      </q-toolbar> -->
+
       <!-- 搜尋欄，關鍵字搜尋文章 -->
       <q-form class="row">
         <div class="col" />
@@ -71,7 +66,7 @@
 import { useRoute, useRouter } from 'vue-router';
 import { onMounted, reactive, ref, watch } from 'vue';
 import * as yup from "yup";
-import { get_articles, search_keyword_articles } from 'src/api/ArticeServices';
+import { get_articles, search_keyword_articles } from 'src/api/ArticeService';
 
 const route = useRoute();
 const router = useRouter();

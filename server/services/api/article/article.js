@@ -114,7 +114,7 @@ router.get(
   }
 );
 
-// 查詢文章
+// 查詢相關文章列表
 router.get(
   "/articles/:id/related",
   celebrate({

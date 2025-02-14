@@ -20,7 +20,7 @@
       </div>
 
       <!-- 音訊 -->
-      <audio v-if="isloading" src="/src/assets/test.mp3" controls />
+      <audio v-if="isloading" src="test.mp3" controls />
       <!-- <audio :src="article.audio" controls /> -->
 
       <!-- 原文，沒有解析時 -->
@@ -123,7 +123,7 @@
 
 <script setup>
 import { ref, reactive, onMounted, watch } from 'vue'
-import { get_artice_related_artices, get_article } from 'src/api/ArticeServices';
+import { get_artice_related_artices, get_article } from 'src/api/ArticeService';
 import { useRoute } from 'vue-router'
 import { useRouter } from 'vue-router';
 

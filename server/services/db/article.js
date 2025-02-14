@@ -262,7 +262,7 @@ class Article {
     if (Array.isArray(keyword)) keyword = keyword.join(" ");
     const keywordArray = new Array(10).fill(keyword);
 
-    const [result_total] = await pool.query(
+    const [[result_total]] = await pool.query(
       `
       SELECT COUNT(id) AS total 
       FROM literary_soundscape.article article 
@@ -310,6 +310,7 @@ class Article {
           ) AGAINST(? IN BOOLEAN MODE)
         ) AS score,
         article.id, 
+        JSON_OBJECT('id', school.id, 'name', school.name) AS school, 
         JSON_OBJECT('id', article.attractions_id, 'name', attractions.name) attraction,
         JSON_OBJECT('id', article.article_type, 'name', article_type.name) article_type,
         ANY_VALUE(article.title) title, 
@@ -327,6 +328,7 @@ class Article {
       LEFT JOIN literary_soundscape.article_tag article_tag ON article_tag_association.tag_id = article_tag.id
       LEFT JOIN literary_soundscape.article_type article_type ON article.article_type = article_type.id
       LEFT JOIN literary_soundscape.attractions attractions ON article.attractions_id = attractions.id
+      LEFT JOIN literary_soundscape.school school ON attractions.school_id = school.id
       WHERE 
         MATCH(article.title, article.auther, article.content) AGAINST(? IN NATURAL LANGUAGE MODE) 
           OR MATCH(article_tag.name) AGAINST(? IN NATURAL LANGUAGE MODE) 

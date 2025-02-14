@@ -1,13 +1,16 @@
 import { api } from "src/boot/axios";
 
+// 取得景點相關文章
 export const get_attraction_related_artice = async (id, limit, artice_type) => {
   try {
     let url;
+    // 多類型文章
     if (Array.isArray(artice_type))
       url = `/articles/${id}/relatedarticles?limit=${limit}&artice_type[]=${artice_type.join(
         "&artice_type[]="
       )}`;
     else
+      // 單一類型文章
       url = `/articles/${id}/relatedarticles?limit=${limit}&artice_type=${artice_type}`;
     const res = await api.get(url);
     return { success: true, data: res.data };
@@ -42,6 +45,7 @@ export const get_articles = async (filter) => {
   }
 };
 
+// 取得文章詳細資訊
 export const get_article = async (id) => {
   try {
     const res = await api.get(`/articles/${id}`);
@@ -52,6 +56,7 @@ export const get_article = async (id) => {
   }
 };
 
+// 取得文章相關文章
 export const get_artice_related_artices = async (id, limit, page) => {
   try {
     const res = await api.get(`/articles/${id}/related?limit=${limit}&page=${page}`);
@@ -62,6 +67,7 @@ export const get_artice_related_artices = async (id, limit, page) => {
   }
 }
 
+// 關鍵字查詢文章
 export const search_keyword_articles = async (filter) => {
   try {
     const { keyword, page, limit } = filter;

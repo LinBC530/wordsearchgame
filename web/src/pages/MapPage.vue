@@ -15,8 +15,8 @@
             <!-- 景點圖片 -->
             <q-card-section align="center">
               <div>
-                <q-skeleton v-if="isloading" height="450px" width="450px" animation="fade" />
-                <q-img v-else :src="article.img || 'src/assets/load_img_error.png'" fit="contain"
+                <q-skeleton v-if="isloading" style="aspect-ratio: 1 / 1;" animation="fade" />
+                <q-img v-else :src="article.img || 'load_img_error.png'" fit="contain"
                   style="max-width: 450px; max-height: 500px" />
               </div>
             </q-card-section>
@@ -59,7 +59,7 @@
 import { useGoogleMapStore } from "src/stores/GoogleMap"
 import { ref, onMounted, reactive, watch } from "vue"
 import { Loader } from "@googlemaps/js-api-loader"
-import { get_all_coordinate, get_attractions_card_info } from "src/api/MapService"
+import { get_all_coordinate, get_attractions_card_info } from "src/api/AttractionService"
 import { useRouter } from "vue-router"
 
 // 引入路由
@@ -100,8 +100,8 @@ function set_article(id, title, content, img) {
 // 顯示景點資訊
 async function show_area_info(area_id) {
   alert.value = true
-  const { id, introduce, name, image } = await get_attractions_card_info(area_id)
-  set_article(id, name, introduce, image)
+  const { id, introduce, name, image_path } = await get_attractions_card_info(area_id)
+  set_article(id, name, introduce, image_path)
 }
 
 // 跳轉至指定路徑
@@ -157,7 +157,7 @@ onMounted(async () => {
     // 創建圖片元素(標記點)
     const icon = document.createElement('img');
     icon.className = 'marker-icon';
-    icon.src = '/src/assets/location.png';
+    icon.src = 'location.png';
     icon.width = 40;
     icon.height = 40;
 

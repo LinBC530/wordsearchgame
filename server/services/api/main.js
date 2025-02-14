@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { errors } = require("celebrate");
 
 const account = require("./account/account.js");
 const attraction = require("./attraction/attraction.js");
@@ -10,5 +11,7 @@ router.use("/account", account);
 router.use("/map", attraction);
 router.use("/games", game);
 router.use(article);
+
+router.use(errors());
 
 module.exports = router;
