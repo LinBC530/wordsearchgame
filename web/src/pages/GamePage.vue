@@ -43,10 +43,11 @@ const game = reactive({
 });
 
 function set_game_data(data) {
+  console.log(data)
   game.name = data.name;
   game.datas = data.data;
-  game.group_id = data.game_group.id;
-  game.group_name = data.game_group.name;
+  game.group_id = data.id;
+  game.group_name = data.name;
 }
 
 function reset_game_data() {

@@ -1,5 +1,7 @@
 // Env
-require("dotenv").config();
+require("dotenv").config({
+  path: process.env.NODE_ENV ? `./${process.env.NODE_ENV}.env` : "./.env",
+});
 
 // Express
 const express = require("express");
@@ -20,7 +22,6 @@ app.use(cors());
 const api = require("./services/api/main");
 app.use(express.json());
 app.use("/api", api);
-
 
 // https
 const https = require("https").Server(options, app);

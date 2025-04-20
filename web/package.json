@@ -2,7 +2,7 @@
   "name": "web",
   "version": "0.0.1",
   "description": "A Quasar Project",
-  "productName": "文學音景",
+  "productName": "word search game",
   "author": "someone",
   "private": true,
   "scripts": {
@@ -11,7 +11,6 @@
     "build": "quasar build"
   },
   "dependencies": {
-    "@googlemaps/js-api-loader": "^1.16.8",
     "@quasar/extras": "^1.0.0",
     "axios": "^1.2.1",
     "dotenv": "^16.4.7",

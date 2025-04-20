@@ -1,0 +1,51 @@
+services:
+  server:
+    image: wsgame:latest
+    container_name: server
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    environment:
+      - NODE_ENV=prod
+      - PORT=${SERVER_PORT}
+    volumes:
+      - ${SSL_KEY_PATH}:/etc/ssl/server.key:ro
+      - ${SSL_CRT_PATH}:/etc/ssl/server.crt:ro
+    networks:
+      - my_network
+
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "${MYSQL_PORT}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - my_network
+    
+  nginx:
+    image: nginx:1.27.4-alpine
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /root/conf/nginx:/etc/nginx/conf.d:ro
+      - /root/web/wsgame:/usr/share/nginx/html:ro
+      - ${SSL_KEY_PATH}:/etc/ssl/server.key:ro
+      - ${SSL_CRT_PATH}:/etc/ssl/server.crt:ro
+    depends_on:
+      - server
+    networks:
+      - my_network
+volumes:
+  mysql_data:
+
+networks:
+  my_network:
+    driver: bridge

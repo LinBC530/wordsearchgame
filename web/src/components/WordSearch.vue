@@ -1,5 +1,5 @@
 <template>
-  <q-img src="~assets/robot_squirrel.jpg" class="absolute fit bg-img" fit="cover" />
+  <!-- <q-img src="~assets/robot_squirrel.jpg" class="absolute fit bg-img" fit="cover" /> -->
   <div class="col row q-px-md q-pb-md q-gutter-y-md">
     <!-- 網格 -->
     <div class="col-md col-12 column">

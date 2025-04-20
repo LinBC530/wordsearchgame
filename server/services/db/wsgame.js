@@ -8,13 +8,13 @@ class WSGame {
     const [[result]] = await pool.query(
       `
       SELECT
-        game.id,
-        JSON_OBJECT('id', game.group_id, 'name', game_group.name) AS game_group,
-        game.name,
-        game.data 
-      FROM literary_soundscape.game game
-      LEFT JOIN literary_soundscape.game_group game_group ON game.group_id = game_group.id
-      WHERE game.id = ?`,
+        games.id,
+        JSON_OBJECT('id', games.group_id, 'name', game_groups.name) AS game_groups,
+        games.name,
+        games.data 
+      FROM wordsearchgame.games games
+      LEFT JOIN wordsearchgame.game_groups game_groups ON games.group_id = game_groups.id
+      WHERE games.id = ?`,
       [id]
     );
 
@@ -23,12 +23,19 @@ class WSGame {
   static async find_all_game_by_group() {
     const [result] = await pool.query(
       `
-        SELECT 
-            game_group.id,
-            game_group.name,
-            JSON_ARRAY(JSON_OBJECT('id', game.id, 'name', game.name, 'data', game.data)) AS games
-        FROM literary_soundscape.game game
-        LEFT JOIN literary_soundscape.game_group game_group ON game.group_id = game_group.id;`
+      SELECT
+        game_groups.id,
+        game_groups.name,
+        JSON_ARRAYAGG(
+          JSON_OBJECT(
+            'id', games.id,
+            'name', games.name,
+            'data', games.data
+          )
+        ) AS games
+      FROM wordsearchgame.game_groups
+      LEFT JOIN wordsearchgame.games ON games.group_id = game_groups.id
+      GROUP BY game_groups.id, game_groups.name;`
     );
 
     return result;
