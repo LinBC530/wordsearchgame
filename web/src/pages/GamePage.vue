@@ -2,7 +2,6 @@
   <q-page class="column">
     <q-toolbar class="q-pa-sm">
       <q-breadcrumbs class="q-mr-sm">
-        <q-breadcrumbs-el label="課程遊戲" />
         <q-breadcrumbs-el :label="game.group_name" />
         <q-breadcrumbs-el :label="game.name" />
       </q-breadcrumbs>
@@ -11,10 +10,6 @@
     <Suspense>
       <template #default>
         <WordSerach v-if="game.datas" :datas="game.datas" :key="route.params.id" />
-        <!-- <div> -->
-          <!-- 文字搜尋遊戲組件 -->
-          <!-- <WordSerach v-if="game.datas" :datas="game.datas" :key="route.params.id" class="q-mt-md" />
-        </div> -->
       </template>
       <template #fallback class="col column">
         <div class="flex items-center justify-center q-pa-md fit col">
@@ -46,8 +41,8 @@ function set_game_data(data) {
   console.log(data)
   game.name = data.name;
   game.datas = data.data;
-  game.group_id = data.id;
-  game.group_name = data.name;
+  game.group_id = data.game_groups.id;
+  game.group_name = data.game_groups.name;
 }
 
 function reset_game_data() {
