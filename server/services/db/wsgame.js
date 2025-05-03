@@ -1,9 +1,7 @@
 const pool = require("./dbPool");
 
 class WSGame {
-  static async add(data) {}
-  static async delete(id) {}
-  static async update(id, data) {}
+  // 依ID查詢遊戲
   static async find_game(id) {
     const [[result]] = await pool.query(
       `
@@ -20,6 +18,7 @@ class WSGame {
 
     return result;
   }
+  // 查詢所有遊戲，依群組分組
   static async find_all_game_by_group() {
     const [result] = await pool.query(
       `

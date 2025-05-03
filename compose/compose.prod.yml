@@ -12,6 +12,7 @@ services:
       - ${SSL_CRT_PATH}:/etc/ssl/server.crt:ro
     networks:
       - my_network
+    restart: on-failure:3
 
   mysql:
     image: mysql:8
@@ -27,6 +28,7 @@ services:
       - mysql_data:/var/lib/mysql
     networks:
       - my_network
+    restart: always
     
   nginx:
     image: nginx:1.27.4-alpine
@@ -43,6 +45,8 @@ services:
       - server
     networks:
       - my_network
+    restart: on-failure:3
+
 volumes:
   mysql_data:
 
